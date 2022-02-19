@@ -1,0 +1,15 @@
+<div class="border rounded mt-2 mb-2">
+	<h5 id="test" class="border-bottom bg-light p-2">People You May Know</h5>
+	{% for suggest in suggestion %}
+		<div class="border-bottom p-2">
+			<a href="{{ path('profile', {'username': suggest.username}) }}" class="font-weight-bold">
+				<h6 class="col m-0">
+					<img src="{{ asset('icons/Doughboy.scale-100.png') }}">
+					{{ suggest.fullname}}<br>
+				</h6>
+			</a>
+			
+			<p class="font-weight-normal">{{ suggest.about }}</p>
+		</div>
+	{% endfor %}
+</div>

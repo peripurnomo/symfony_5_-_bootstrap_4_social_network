@@ -1,0 +1,5 @@
+<form method="post" class="form-inline" action="{{ path('commentDelete', {'id': comment.id, 'username': post.username}) }}) }}" onsubmit="return confirm('Hapus komentar ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+    <button class="btn btn-sm text-danger">Hapus</button>
+</form>

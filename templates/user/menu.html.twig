@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Menu - {{ app.user.fullname }}
+{% endblock %}
+
+{% block body %}
+	<div class="navbar sticky-top border-bottom bg-light">
+		<h6>{{ app.user.fullname }}</h6>
+	</div>
+
+	<nav class="nav flex-column">
+		<a class="nav-link border-bottom" href="{{ path('changePassword') }}">Ubah password</a>
+		<a class="nav-link border-bottom" href="#">Laporkan bug</a>
+		<a class="nav-link border-bottom" href="#">Tentang <span class="font-weight-bold">{{ brand }}</span></a>
+		<a class="nav-link border-bottom" href="{{ path('app_logout') }}">Logout</a>
+	</nav>
+{% endblock %}

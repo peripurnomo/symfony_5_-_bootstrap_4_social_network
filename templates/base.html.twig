@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('./css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset('./css/libs/bootstrap.css') }}">
+        {% endblock %}
+    </head>
+    
+    <body class="text-dark">
+        <header>
+            {% block navigation %}{{ include('_layout/navbar.html.twig') }}{% endblock %}
+            {% block notification %}{{ include('_layout/flasher.html.twig') }}{% endblock %}
+        </header>
+
+        <main>{% block body %}{% endblock %}</main>
+
+        {% block javascripts %}
+            <script src="{{ asset('js/libs/jquery-3.2.1.slim.min.js') }}"></script>
+            <script src="{{ asset('js/libs/popper-1.12.9.min.js') }}"></script>
+            <script src="{{ asset('js/libs/bootstrap-4.0.0.min.js') }}"></script>
+            <script src="{{ asset('js/libs/autosize.min.js') }}"></script>
+
+            <script>
+                autosize(document.querySelectorAll('textarea'));
+            </script>
+        {% endblock %}
+    </body>
+</html>

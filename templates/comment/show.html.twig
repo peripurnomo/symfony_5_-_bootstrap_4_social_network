@@ -1,0 +1,35 @@
+{% for comment in comments %}
+	<div class="pl-2">
+		<div class="font-weight-bold">
+			{% if app.user and app.user.username == comment.commenter %}
+				<span class="text-primary">Anda</span>
+			{% else %}
+				<a href="{{ path('profile', {'username': comment.commenter}) }}">{{ comment.commenter ? '@' ~ comment.commenter : '' }}</a>
+			{% endif %}
+		</div>
+
+		<div class="pl-3">
+			{{ comment.commentBody ? comment.commentBody : '' }}
+			
+			<div class="">
+				{% if app.user and app.user.username == comment.commenter %}
+					<ul class="nav list-group-horizontal">
+						<li>
+							<a class="btn btn-sm text-primary" href="{{ path('commentEdit', {'id': comment.id}) }}">Edit</a>
+						</li>
+
+						<li>
+							{{ include('comment/form/delete.html.twig') }}
+						</li>
+					</ul>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endfor %}
+
+<div class="">
+	{{ render(controller(
+		'App\\Controller\\CommentController::newCommentForm', {
+			'id': post.id})) }}
+</div>

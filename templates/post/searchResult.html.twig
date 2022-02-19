@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Search Result
+{% endblock %}
+
+{% block body %}
+	{% for result in results %}
+		<hr class="my-0">
+    	<div class="row m-0 p-2">
+    		{# Post avatar #}
+			<div class="col-0">
+				{{ render(controller(
+					'App\\Controller\\UserController::displayAvatar', {
+						'username': result.username})) }}</div>
+			
+			{# Post content. #}
+			<div class="col">
+				<p class="font-weight-bold m-0">@{{ result.username }}</p>
+				<div class="">{{ result.body ? result.body : '' }}</div>
+				<p class="font-weight-bold">{{ result.at ? result.at|date('D, M y') : '' }}</p>
+			</div>
+		</div>	    	
+	{% endfor %}
+{% endblock %}

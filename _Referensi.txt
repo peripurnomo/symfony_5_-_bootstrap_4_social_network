@@ -1,0 +1,195 @@
+SELECT city,
+	count(*),
+	avg(age),
+	max(age) - min(age)
+FROM users
+WHERE last_active > now() - interval '30' day
+GROUP BY city
+HAVING count(*) > 1000
+
+/**
+ * @Route("/home/{city<\w+>?Jakarta}", name="app_home")
+ * @Security("user.getUsername() == post.getUsername()")
+ */
+public function index($city, CityRepository $cityRepo)
+{
+	$cityRepo->find($city);
+	$request->request->get('post');
+}
+
+// generate a URL with route arguments
+$userProfilePage = $this->generateUrl('user_profile', [
+	'username' => $user->getUsername(),
+]);
+
+// generate a URL intemplate
+<script>
+	const route = "{{ path('blog_show', {slug: 'my-blog-post'})|escape('js') }}";
+</script>
+
+try {
+	$url = $this->router->generate($routeName, $routeParameters);
+} catch (RouteNotFoundException $e) {
+	// the route is not defined...
+}
+
+
+date_default_timezone_set('Europe/London');
+date_default_timezone_get();
+
+==== ======= =====
+SQL	  Query   Ref
+==== ======= =====
+Inner or Cross Join
+	SELECT pl.id_pelanggan, nama, tgl_transaksi, total_transaksi
+	FROM pelanggan pl
+	JOIN penjualan pn ON pl.id_pelanggan = pn.id_pelanggan
+
+Outer Join :
+	Query Profile Post:
+		SELECT *
+		FROM post p
+		LEFT JOIN comment c
+		ON c.username=p.username
+		AND c.post_id=p.id
+
+	Query following post :
+		SELECT post_body
+		FROM follow f
+		LEFT JOIN post p
+		USING (username)
+		WHERE f.username = p.username
+		AND f.follower = 'peripurnomo'
+
+
+
+/**
+ * @Route("/comment/show/", name="showComment")
+ */
+public function index(Request $request, CommentRepository $commentRepo) :Response
+{
+    $comments = $commentRepo->findBy(['commenter' => $this->getUser()->getUsername()]);
+    
+    if ($request->isXmlHttpRequest()) {
+        $jsonData = [];
+        $idx = 0;
+
+        foreach ($comments as $comment) {
+            $temp = [
+                'username'  => $comment->getUsername(),
+                'commenter' => $comment->getCommenter(),
+                'content'   => $comment->getCommentBody()
+            ];
+            $jsonData[$idx++] = $temp;
+        }
+        return new JsonResponse($jsonData);
+    }
+
+    return $this->redirectToRoute('app_home');
+}
+
+public function buildForm(FormBuilderInterface $builder, [] $options)
+{
+	$builder
+		// If you don't define field options, you can omit the second argument
+		->add('task')
+		// If you define field options, pass NULL as second argument
+		->add('dueDate', null,['required' => false])
+		->add('save', SubmitType::class)
+	;
+}
+
+
+When editing an object via a form, all form fields are considered properties of the object. Any fields on the form that do not exists on the object will cause an exception to be thrown.
+If you need extra field in the form that won't be stored in the object (for example to add an "I agree with these terms" checkbox), set mapped option to false in those fields:
+	public function buildForm(FormBuilderInterface $builder, [] $options)
+	{
+		$builder
+			// If you don't define field options, you can omit the second argument
+			->add('task')
+			// If you define field options, pass NULL as second argument
+			->add('task')
+			->add('dueDate', null,['required' => false])
+			->add('agreeTerms', CheckboxTpe::class, ['mapped' => false])
+			->add('save', SubmitType::class)
+		;
+	}
+This "unmapped fields" can be set and acessed in a controller with:
+	$form->get('agreeTerms')->getData();
+	$form->get('agreeTerms')->setData(true);
+Additionally, if there are any field will be explicitly set to null.
+
+
+
+What is my impact for indonesia ?
+
+Sumber rekomendasi => city, hoby, phone contact, phone number/app interact (ex. WhatApp chat), jobs, birth of years (range), gender, gender intersted, grup type, search history, cookie,
+
+
+by outfit		product: e.g. gofood, goride, gosend, etc
+by color		Business, Marketing, etc
+by type			Booking, Bid, Cancellation
+by access control: user, pending user, blocked user, non user, admin
+
+Type of data:
+1. User data
+All of data are share on facebook
+
+2. Log data/event
+
+Facebook:
+HayStack
+MySQL
+H-BASE
+Corona HADOOP
+HIVE [Core analitics]
+HDFS [massively distributed store]
+PRESTO [interactive analitics]
+APACHE GIRAPH [graph analitics]
+
+
+insights.fb.com
+
+data used to :
+ads targeting
+
+News feed
+
+Recomendasi, halaman people
+
+graph search
+
+site integrity
+a/b test[exprementation framework]
+
+product insight[ads, pages, platform]
+
+misalkan saya punya input
+$text = "example with url https://example.com";
+kemudian gimana caranya kalo saya ingin replace jika $text tadi mengandung url/link
+
+atau mungkin pakai ini buat detect url (regex)
+$patter1 = "^(http(s)?:\/\/)?(www\.)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
+$patter2 = "/^(http|https|ftp):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+.(com|org|net|dk|at|us|tv|info|uk|co.uk|biz|se)$)(:(\d+))?\/?/i"
+$pattern3 = "/^(www)((\.[A-Z0-9][A-Z0-9_-]*)+.(com|org|net|dk|at|us|tv|info|uk|co.uk|biz|se)$)(:(\d+))?\/?/i"
+
+jadi outputnya hanya 
+example with url
+
+kira kira pake apa ya?
+
+
+function parseUrl($url) {
+	$r = "^(?:(?P<scheme>\w+)://)?";
+	$r .= "(?:(?P<login>\w+):(?P<pass>\w+)@)?";
+	$r .= "(?P<host>(?:(?P<subdomain>[\w\.]+)\.)?" . "(?P<domain>\w+\.(?P<extension>\w+)))";
+	$r .= "(?::(?P<port>\d+))?";
+	$r .= "(?P<path>[\w/]*/(?P<file>\w+(?:\.\w+)?)?)?";
+	$r .= "(?:\?(?P<arg>[\w=&]+))?";
+	$r .= "(?:#(?P<anchor>\w+))?";
+	$r = "!$r!"; // Delimiters
+
+	preg_match ( $r, $url, $out );
+
+	return $out;
+}

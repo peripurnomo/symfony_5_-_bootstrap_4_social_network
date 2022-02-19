@@ -1,0 +1,35 @@
+<ul class="nav list-group-horizontal">
+	<li>
+		<a href="{{ path('postShow', {'id': post.id})}}" class="btn btn-sm">
+			<img src="{{ asset('icons/feather/message-circle.svg') }}">
+		</a>
+
+		<span class="font-weight-bold">
+			{{ render(controller(
+			'App\\Controller\\CommentController::totalComment', {
+				'id': post.id})) }}
+		</span>
+	</li>
+
+	<li>
+		<form action="{{ path('app_like', {'id': post.id}) }}" method="post" class="d-inline">
+			<input type="hidden" name="_token" value="{{ csrf_token('like' ~ post.id) }}">
+			<button type="submit" class="btn btn-sm">
+				<img src="{{ asset('icons/feather/thumbs-up.svg') }}">
+			</button>
+		</form>
+
+		<span class="font-weight-bold">
+			{{ render(controller(
+				'App\\Controller\\ThumbController::totalLiking', {
+					'id': post.id})) }}</span>
+	</li>
+
+	{% if app.user and app.user.username == post.username %}
+		<li>
+			<a class="btn btn-sm" href="{{ path('postEdit', {'id': post.id}) }}"><img src="{{ asset('icons/feather/edit-2.svg') }}"></a>
+		</li>
+
+		<li>{{ include('post/form/delete.html.twig') }}</li>
+	{% endif %}
+</ul>

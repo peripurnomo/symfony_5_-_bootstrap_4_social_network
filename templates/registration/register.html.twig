@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ brand }} - Registration{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 m-auto">
+                <h3 class="mb-4 text-center">{{ brand }} <br> Registrasi</h3>
+                {{ form_start(registrationForm) }}
+                    <div class="form-group">
+                        {{ form_row(registrationForm.fullname) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(registrationForm.username) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(registrationForm.email) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_row(registrationForm.password) }}
+                    </div>
+
+                    <div class="text-center">
+                        {% form_theme registrationForm.birthdate 'form_div_layout.html.twig' %}
+                        <div class="form-group">
+                            {{ form_row(registrationForm.birthdate) }}
+                        </div>
+
+                        {% form_theme registrationForm.gender 'form_div_layout.html.twig' %}
+                        <div class="form-group">
+                            {{ form_label(registrationForm.gender, null, {'label': 'Jenis Kelamin :'}) }}
+                            {{ form_row(registrationForm.gender) }}
+                        </div>
+                    </div>
+
+                    <button class="col my-2 btn btn-primary">Registrasi</button>
+                {{ form_end(registrationForm) }}
+
+                <div class="text-center">
+                    Baru kenal <a href="#">{{ brand }}</a> ? <br>
+                    Saya ingin <a href="{{ path('app_login') }}">login</a>.<br>
+                    Hubungi pusat <a href="#">bantuan.</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ post.body }}
+{% endblock %}
+
+{% block body %}
+	<div class="row m-2">
+		<div class="col-0">
+			{{ render(controller(
+				'App\\Controller\\UserController::displayAvatar', {
+					'username': post.username})) }}
+		</div>
+		
+		<div class="col">
+			<div class="">
+				<span class="font-weight-bold">
+					@{{ post.username }} - 
+				</span>
+
+				<span class="badge text-muted">
+					{{ post.at ? post.at|date('D, M y') : '' }}
+				</span>
+			</div>
+
+			<hr class="my-2">
+
+			<div class="">
+				<div class="">
+					<div class="font-weight-normal">
+						{{ post.body }}
+					</div>
+
+					<div class="">
+						<ul class="nav list-group-horizontal">
+							<li>
+								<form action="{{ path('app_like', {'id': post.id}) }}" method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token('like' ~ post.id) }}">
+									<button type="submit" class="btn btn-sm">
+										<img src="{{ asset('icons/feather/thumbs-up.svg') }}">
+									</button>
+								</form>
+							</li>
+
+							{% if app.user and app.user.username == post.username %}
+								<li>
+									<a class="btn btn-sm text-primary" href="{{ path('postEdit', {'id': post.id}) }}">
+										<img src="{{ asset('icons/feather/edit-2.svg') }}">
+									</a>
+								</li>
+
+								<li>
+									{{ include('post/form/delete.html.twig') }}
+								</li>
+							{% endif %}
+						</ul>						
+					</div>
+				</div>
+			</div>
+			
+			<hr class="my-2">
+			<h5>Komentar:</h5>
+
+			<div class="pb-4">
+	        	{{ render(controller(
+	        		'App\\Controller\\CommentController::commentShow', {
+	        			'id': post.id})) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

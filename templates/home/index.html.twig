@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ brand|title ~ ' - Beranda' }}
+{% endblock %}
+
+{% block body %}
+	{# Timeline post start. #}
+	{# {% for post in posts %}
+		<hr class="my-0">
+    	<div class="row m-2">
+			<div class="col-0">
+				{{ render(controller(
+					'App\\Controller\\UserController::displayAvatar', {
+						'username': post.username})) }}</div>
+
+			<div class="col">
+				<div class="font-weight-bold">
+					<a href="{{ path('profile', {'username': post.username}) }}">@{{ post.username }}</a>
+				</div>
+
+				<div class="">
+					{{ post.body }}
+				</div>
+
+				<span class="font-weight-bold">{{ post.at ? post.at|date('D, M y') : '' }}</span>
+
+				{{ include('post/postAction.html.twig') }}
+			</div>
+		</div>
+	{% endfor %} #}
+	{# Timeline post end. #}
+{% endblock %}

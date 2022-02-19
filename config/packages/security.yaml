@@ -1,0 +1,43 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt))/
+            security: false
+
+        main:
+            pattern: ^/
+            switch_user: false
+            anonymous: true
+            
+            form_login:
+                check_path: app_login
+                login_path: app_login
+                csrf_token_generator: security.csrf.token_manager
+                default_target_path: home
+                always_use_default_target_path: false
+
+            logout:
+                path: app_logout
+                target: app_login
+
+            guard:
+                authenticators:
+                    - App\Security\UserAuthenticator
+                entry_point: App\Security\UserAuthenticator
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/forgotPassword, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetPassword, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

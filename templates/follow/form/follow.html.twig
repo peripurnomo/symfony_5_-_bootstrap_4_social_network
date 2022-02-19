@@ -1,0 +1,4 @@
+<form action="{{ path('follow', {'id': data.id}) }}" method="post">
+	<input type="hidden" name="_token" value="{{ csrf_token('follow' ~ data.id) }}">
+	<button type="submit" class="col btn btn-sm btn-primary font-weight-bold">Follow</button>
+</form>

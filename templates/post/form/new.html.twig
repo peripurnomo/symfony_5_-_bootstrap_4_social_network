@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ app.user.fullname }} - Profile
+{% endblock %}
+
+{% block body %}
+    <div class="bg-light p-2">
+        {{ form_start(form, {method: 'post', action: path('postNew')}) }}
+            <label>
+            	<img src="{{ asset('icons/feather/edit.svg') }}"> Buat Postingan
+            </label>
+
+            {{ form_row(form.body, {
+                    'attr': {
+            			'placeholder': 'Lagi mikirin apa teman ?',
+            			'maxlength': 720
+            		}
+            	}) 
+        	}}
+            
+            <button type="submit" class="btn btn-primary">Bagikan</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

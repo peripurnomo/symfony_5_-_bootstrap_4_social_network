@@ -1,0 +1,11 @@
+{{ form_start(form, {method: 'post', action: path('commentNew', {'id': post.id})}) }}
+	{{ form_row(form.commentBody, {
+		'attr': {
+				'placeholder': 'Komentar anda ?',
+                'maxlength': 720,
+			}
+		})
+	}}
+	
+	<button type="submit" class="btn btn-primary">Komentari</button>
+{{ form_end(form) }}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Following - {{ app.user.fullname }}
+{% endblock %}
+
+{% block body %}
+	{% for f in following %}
+		<div class="row m-0 p-2">
+			<div class="col-0">
+				{# Render following avatar #}
+				{# {{ render(controller('App\\Controller\\UserController::displayAvatar', {'username': f.username})) }} #}
+			</div>
+
+			<div class="col-0 m-2">
+				{# Link ke profile following terkait. #}
+				<a class="" href="{{ path('profile', {'username': f.username}) }}">
+					{{ f.username ? '@' ~ f.username : 'No records!' }}
+				</a>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

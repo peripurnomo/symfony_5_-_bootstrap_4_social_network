@@ -1,0 +1,8 @@
+<form method="post" class="form-inline" action="{{ path('postDelete', {'id': post.id}) }}) }}"
+	onsubmit="return confirm('Yakin ingin menghapus ?');">
+	<input type="hidden" name="_method" value="DELETE">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+	<button class="btn btn-sm text-danger" type="submit">
+		<img src="{{ asset('icons/feather/trash.svg') }}">
+	</button>
+</form>
